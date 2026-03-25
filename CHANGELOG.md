@@ -37,7 +37,7 @@ Bug fixes:
 Notes for packagers:
 - Qt version 5.12 or greater is now required
 - Bump minimum CMake version to 3.13
-- Bump CXX_STANDARD to 17 for Qt6 
+- Bump CXX_STANDARD to 17 for Qt6
 - Compiling with -Werror=odr no longer fails due to a mismatch
 
 ## [v0.6.0](https://github.com/ckb-next/ckb-next/tree/v0.6.0) (2023-06-23)
