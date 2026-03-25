@@ -1,5 +1,74 @@
 # Change Log
 
+## [v0.6.3](https://github.com/ckb-next/ckb-next/tree/v0.6.3) (2026-03-24)
+[Full Changelog](https://github.com/ckb-next/ckb-next/compare/v0.6.2...v0.6.3)
+
+Support for new devices:
+- K70 Core RGB
+- K70 PRO Optical-Mechanical
+- K70 TKL Champion Optical-Mechanical
+- Dark Core RGB Pro SE (support was experimental previously)
+- Scimitar Elite
+
+Features:
+- Backlights can now be idled on Wayland compositors. This requires a valid
+  seat in the wayland session.
+- Backlights can now be idled by using the command line switch `--sleep`.
+- Macros can now be setup with random delays per action and pre-delay before
+  first repetition.
+- Add support for LSB ("Linux Standard Base") style daemon control.
+- Autostart functionality is hoisted to the Desktop Environment.
+- When starting the GUI without the daemon the commands to unmask/stop/start
+  the daemon can now be copied into the clipboard.
+- Add new `plasma` animation, based on ReallySlick screensavers. Thanks to
+  @ewhac for submitting.
+- Add new pastel rainbow preset.
+
+Bug fixes:
+- Improve text translation in GUI.
+- Improve support for musl standard library.
+- Stop daemon from spamming "unknown NKRO byte" messages by properly ignoring
+  Report IDs from NKRO bytes.
+- 6KRO for legacy devices was fixed to track the pressed keys, instead of
+  releasing them unconditionally.
+- Fix verification of firmware signatures, when GPG option "use-keyboxd" was
+  enabled but the default home directory did not exist.
+- Remove incorrect requirement of 6 hours of uptime before firmware update
+  checks would be issued.
+- Legacy devices no longer take 30s to initialize due to the delay being set
+  incorrectly.
+- Properly determine background colour for OpenGL widgets.
+- Fix slow setup for the K55 by disabling its unsupported hardware profiles.
+- Fix layout of K95 Platinum XT.
+- The K100 now displays the correct Fn key instead of the erroneous right win
+  key.
+- The K100 now emits different events on the control dial and the volume
+  barrel.
+- Fix error in udev rule.
+- Fix erroneous message about already running ckb-next.
+- Fix inverting scrolling in status notification when on KDE.
+- Fix crash on Wayland, when displays disappears/changes.
+- Fix naming of "equal" key when recording macros.
+- Fix typo of "equal" key when recording macros, which was erroneously
+  "equals".
+- Fix error message when the daemon cannot create the pollrate path.
+- Prevent key spam on certain keyboard dials.
+- Remove references to unmaintained communication channels.
+- Improve internal handling of key names. Animations will now warn if a key
+  name is truncated.
+- Various improvements to developer experience, i.e. added checks and resolved
+  warnings/deprecations.
+- Minor improvements to translations into Greek and German.
+
+Notes for packagers:
+- When building the GUI Qt 6 is now the preferred
+- Wayland features are enabled by default on Linux when building the GUI with
+  Qt 6.
+- The GUI is now compiled with `-Wno-error=deprecated-declarations`.
+- On Qt5 the GUI is now linked with OpenGL by default.
+- Ensure the `ckb-next.desktop` file is installed into the appropriate
+  directory, for example `/etc/xdg/autostart`.
+
 ## [v0.6.2](https://github.com/ckb-next/ckb-next/tree/v0.6.2) (2025-03-17)
 [Full Changelog](https://github.com/ckb-next/ckb-next/compare/v0.6.1...v0.6.2)
 
