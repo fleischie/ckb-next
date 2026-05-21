@@ -240,7 +240,7 @@ void MainWindow::toggleTrayIcon(bool visible){
 
 void MainWindow::addDevice(Kb* device){
     // Connected already?
-    foreach(KbWidget* w, kbWidgets){
+    for(const KbWidget* w : kbWidgets){
         if(w->device == device)
             return;
     }
@@ -257,7 +257,7 @@ void MainWindow::addDevice(Kb* device){
 }
 
 void MainWindow::removeDevice(Kb* device){
-    foreach(KbWidget* w, kbWidgets){
+    for(KbWidget* w : kbWidgets){
         // Remove this device from the UI
         if(w->device == device){
             int i = kbWidgets.indexOf(w);
@@ -317,7 +317,7 @@ void MainWindow::updateVersion(){
 void MainWindow::checkFwUpdates(){
     if(!mainWindow->isVisible())
         return;
-    foreach(KbWidget* w, kbWidgets){
+    for(KbWidget* w : kbWidgets){
         // Display firmware upgrade notification if a new version is available
         CkbVersionNumber version = kbfw->versionForBoard(w->device->productID);
         if(version > w->device->firmware.app){
@@ -374,7 +374,7 @@ void MainWindow::timerTick(){
         snprintf((char*)appShare.data(), appShare.size(), "PID %ld", (long)getpid());
         appShare.unlock();
         // Parse commands
-        foreach(const QString& line, commands){
+        for(const QString& line : commands){
             // Old ckb option line - bring application to foreground
             if(line == "Open")
                 showWindow();
@@ -475,7 +475,7 @@ void MainWindow::setTabsEnabled(bool e){
 }
 
 MainWindow::~MainWindow(){
-    foreach(KbWidget* w, kbWidgets)
+    for(KbWidget* w : kbWidgets)
         delete w;
     kbWidgets.clear();
     KbManager::stop();
