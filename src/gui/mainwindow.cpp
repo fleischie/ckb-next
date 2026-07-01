@@ -239,19 +239,24 @@ void MainWindow::toggleTrayIcon(bool visible){
 }
 
 void MainWindow::addDevice(Kb* device){
-    // Connected already?
+    int kbIndex = 0;
     for(const KbWidget* w : kbWidgets){
+        // Connected already?
         if(w->device == device)
             return;
+
+        // Determine position of new device based on the serial number of the
+        // device.
+        if (w->device->usbSerial < device->usbSerial)
+            kbIndex += 1;
     }
     // Add the keyboard
     KbWidget* widget = new KbWidget(this, device, windowDetector);
-    kbWidgets.append(widget);
+    kbWidgets.insert(kbIndex, widget);
     // Add to tabber; switch to this device if the user is on the settings screen
-    int count = ui->tabWidget->count();
-    ui->tabWidget->insertTab(count - 1, widget, widget->name());
-    if(ui->tabWidget->currentIndex() == count)
-        ui->tabWidget->setCurrentIndex(count - 1);
+    ui->tabWidget->insertTab(kbIndex, widget, widget->name());
+    if(ui->tabWidget->currentIndex() == ui->tabWidget->count() - 1)
+        ui->tabWidget->setCurrentIndex(kbIndex);
     // Update connected device count
     updateVersion();
 }
